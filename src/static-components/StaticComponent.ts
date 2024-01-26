@@ -1,0 +1,3 @@
+interface StaticComponent {
+    render(): string
+}
