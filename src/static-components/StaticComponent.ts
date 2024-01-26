@@ -1,3 +1,4 @@
 interface StaticComponent {
-    render(): string
+    
+    render(): Promise<string>
 }

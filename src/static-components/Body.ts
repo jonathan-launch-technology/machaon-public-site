@@ -2,12 +2,14 @@ import Container from "./Container";
 import IconUpAndLoader from "./IconUpAndLoader";
 
 export default class Body implements StaticComponent{
-    render(): string {
+
+
+    async render(): Promise<string> {
         return `
         <!-- Container -->
         <div id="container">
-          ${new Container().render()}
-          ${new IconUpAndLoader().render()}
+          ${await new Container().render()}
+          ${await new IconUpAndLoader().render()}
         <div>
       `        
     }

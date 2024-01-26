@@ -96,7 +96,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <head dangerouslySetInnerHTML={{__html:head()}} />
+      <head dangerouslySetInnerHTML={{__html: head()}} />
       {children}
     </html>
   )

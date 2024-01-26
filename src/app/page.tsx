@@ -1,8 +1,11 @@
 import './fontello.css';
 import Body from '@/static-components/Body';
 
-export default function Page () {
+
+
+export default async function Page () {
+
   return (
-      <body dangerouslySetInnerHTML={{__html: new Body().render()}} />
+    <body dangerouslySetInnerHTML={{__html: await new Body().render() }} />
   )
 }

@@ -1,5 +1,56 @@
+import Sponsor from "@/app/data/Sponsor";
+import PlatinumSponsor from "./PlatinumSponsor";
+import PlatinumSponsorList from "./PlatinumSponsorList";
+
+import fs from 'fs'
+import readline from 'readline';
+
+async function fetchPlatinumSponsors() {
+    // const res = await fetch(`http://localhost:3000/api/`);
+
+    // return [
+    //     new Sponsor(
+    //         "111 ThreatLocker® is a global cybersecurity leader, providing enterprise-level cybersecurity tools to improve the security of servers and endpoints. ThreatLocker’s combined Application Whitelisting, Ringfencing™, Storage Control and Privileged Access Management solutions are leading the cybersecurity market towards a more secure approach of blocking unknown application vulnerabilities. To learn more about ThreatLocker visit: www.threatlocker.com",
+    //         "https://technologysummit.net/images/Sponsors/Threatlocker.gif",
+    //         "https://threatlocker.com/"    
+    //     ),
+    //     new Sponsor(
+    //         "222 ThreatLocker® is a global cybersecurity leader, providing enterprise-level cybersecurity tools to improve the security of servers and endpoints. ThreatLocker’s combined Application Whitelisting, Ringfencing™, Storage Control and Privileged Access Management solutions are leading the cybersecurity market towards a more secure approach of blocking unknown application vulnerabilities. To learn more about ThreatLocker visit: www.threatlocker.com",
+    //         "https://technologysummit.net/images/Sponsors/Threatlocker.gif",
+    //         "https://threatlocker.com/"    
+    //     ),
+    //     new Sponsor(
+    //         "333 ThreatLocker® is a global cybersecurity leader, providing enterprise-level cybersecurity tools to improve the security of servers and endpoints. ThreatLocker’s combined Application Whitelisting, Ringfencing™, Storage Control and Privileged Access Management solutions are leading the cybersecurity market towards a more secure approach of blocking unknown application vulnerabilities. To learn more about ThreatLocker visit: www.threatlocker.com",
+    //         "https://technologysummit.net/images/Sponsors/Threatlocker.gif",
+    //         "https://threatlocker.com/"    
+    //     )
+    // ]
+
+    const sponsors = []
+    const filePath = './tmp/sponsors.txt'
+    const fileStream = fs.createReadStream(filePath);
+
+    const rl = readline.createInterface({
+        input: fileStream,
+        crlfDelay: Infinity
+    });
+
+    for await (const line of rl) {
+        sponsors.push(new Sponsor(
+            line,
+            "https://technologysummit.net/images/Sponsors/Threatlocker.gif",
+            "https://threatlocker.com/"    
+        ));
+    }
+    return sponsors;
+  }
+
+
 export default class Container implements StaticComponent {
-    render(): string {
+
+    async render(): Promise<string> {
+        const platinumSponsors = await fetchPlatinumSponsors()
+        
         return `
         
             <!-- Start Header -->
@@ -575,30 +626,15 @@ export default class Container implements StaticComponent {
                     <a id="sponsors" name="sponsors">
                     
                         <!-- Start Platinum Sponsor Section -->
-        
-                    
-                        
-                        <!-- Classic Heading -->
-                        <h4 class="classic-title"><span>Platinum Sponsors</span></h4>
-                        <div class="row">      
+                
+                            <!-- Classic Heading -->
+                            <h4 class="classic-title"><span>Platinum Sponsors</span></h4>
+                            <div class="row">      
                                             
         
-        <!-- Start Sponsor Box -->
-                        <div class="col-md-12 service-box service-center">
-                                <div class="service-icon">
-                                    <a href="https://threatlocker.com/" target="new"><img src="https://technologysummit.net/images/Sponsors/Threatlocker.gif" alt="" width="150" height="100"></a>
-                    
-                            </div><div class="service-content" align="center">
-                                
-                                <p><A href="https://threatlocker.com/" target="_new"><strong>https://threatlocker.com</strong></A></p>
-                                <div class="service-content" align="left">
-                                
-                                <p>ThreatLocker® is a global cybersecurity leader, providing enterprise-level cybersecurity tools to improve the security of servers and endpoints. ThreatLocker’s combined Application Whitelisting, Ringfencing™, Storage Control and Privileged Access Management solutions are leading the cybersecurity market towards a more secure approach of blocking unknown application vulnerabilities. To learn more about ThreatLocker visit: www.threatlocker.com</p>
-                            </div>
-                                
-                                </div>
-                        </div>
-                            <!-- End Sponsor Box -->                 
+                            <!-- Start Sponsor Box -->
+                            ${ await new PlatinumSponsorList(platinumSponsors).render() }
+                        <!-- End Sponsor Box -->                 
                             
                                 
                     </div>

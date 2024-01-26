@@ -1,0 +1,3 @@
+ThreatLocker® is a global cybersecurity leader, providing enterprise-level cybersecurity tools to improve the security of servers and endpoints. ThreatLocker’s combined Application Whitelisting, Ringfencing™, Storage Control and Privileged Access Management solutions are leading the cybersecurity market towards a more secure approach of blocking unknown application vulnerabilities. To learn more about ThreatLocker visit: www.threatlocker.com
+This is another sponsor which is described on line 2
+Here is the third sponsor description loaded from a file
